@@ -5,15 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const cheerio_1 = __importDefault(require("cheerio"));
-const url = 'https://finance.yahoo.com/quote/aapl'; // URL we're scraping
-const AxiosInstance = axios_1.default.create(); // Create a new Axios Instance
-// Send an async HTTP Get request to the url
+const url = 'https://finance.yahoo.com/quote/aapl';
+const AxiosInstance = axios_1.default.create(); 
 AxiosInstance.get(url)
-    .then(// Once we have data returned ...
-// Once we have data returned ...
+    .then(
 response => {
-    const html = response.data; // Get the HTML from the HTTP request
-    const $ = cheerio_1.default.load(html); // Load the HTML string into cheerio
+    const html = response.data; 
+    const $ = cheerio_1.default.load(html); 
     const closeValue = $('*[data-test="PREV_CLOSE-value"]');
     const openValue = $('*[data-test="OPEN-value"]');
     const daysRangeValue = $('*[data-test="DAYS_RANGE-value"]');
@@ -29,8 +27,7 @@ response => {
     console.log(`Average Volume: ${pruneHash(avgVolumeValue)}`);
     console.log(`Market Cap: ${pruneHash(marketCapValue)}`);
 })
-    .catch(console.error); // Error handling
+    .catch(console.error); 
 const pruneHash = (object) => {
     return object['0']['children'][0]['children'][0]['data'];
 };
-//# sourceMappingURL=index.js.map
